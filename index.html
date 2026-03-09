@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Maitax Advies — Register Belastingadviseurs Rotterdam</title>
+<meta name="description" content="Maitax Advies — erkend Register Belastingadviseur in Rotterdam, Rijswijk/Den Haag en Capelle a/d IJssel. Vaste maandtarieven voor belastingadvies en administratie voor ZZP, BV en holding.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maitax-advies.nl/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maitax-advies.nl/">
+<meta property="og:title" content="Maitax Advies — Register Belastingadviseurs">
+<meta property="og:description" content="Erkend RB Kantoor in Rotterdam, Rijswijk/Den Haag en Capelle a/d IJssel. Vaste maandtarieven voor belastingadvies en administratie.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
@@ -34,7 +45,7 @@
 @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,158,150,.5);}55%{box-shadow:0 0 0 8px rgba(0,158,150,0);}}
 @keyframes portaalPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,158,150,.35);}55%{box-shadow:0 0 0 7px rgba(0,158,150,0);}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--off-white);}::-webkit-scrollbar-thumb{background:var(--teal);}
 
@@ -50,7 +61,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08);}
 .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--teal);transition:width .3s;}
 .nav-links a:hover,.nav-links a.active{color:var(--text);}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
-.nav-cta{background:var(--teal);color:#fff;border:none;padding:.6rem 1.6rem;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .25s;animation:ctaPulse 3s ease-in-out infinite;}
+.nav-cta{background:var(--teal);color:#fff;border:none;padding:.75rem 1.6rem;min-height:44px;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .25s;animation:ctaPulse 3s ease-in-out infinite;}
 .nav-cta:hover{background:var(--teal-dk);transform:translateY(-1px);animation:none;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
 .hamburger span{display:block;width:24px;height:1.5px;background:var(--text);}
@@ -344,7 +355,7 @@ footer{background:var(--footer-bg);border-top:3px solid var(--teal);padding:3rem
 }
 
 /* ═══ PORTAAL KNOP ═══ */
-.btn-portaal{background:var(--teal-pale);color:var(--teal-dk);border:none;padding:.55rem 1.3rem;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,transform .25s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;animation:portaalPulse 3s ease-in-out infinite;animation-delay:1.5s;}
+.btn-portaal{background:var(--teal-pale);color:var(--teal-dk);border:none;padding:.75rem 1.3rem;min-height:44px;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,transform .25s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;animation:portaalPulse 3s ease-in-out infinite;animation-delay:1.5s;}
 .btn-portaal:hover{background:var(--teal);color:#fff;transform:translateY(-1px);animation:none;}
 .btn-portaal svg{flex-shrink:0;}
 @media(prefers-reduced-motion:reduce){.nav-cta,.btn-portaal{animation:none;}}
@@ -512,6 +523,7 @@ footer{background:var(--footer-bg);border-top:3px solid var(--teal);padding:3rem
   .wa-btn{bottom:1.25rem;right:1.25rem;width:52px;height:52px;}
   .wa-btn::before{display:none;}
 }
+@media(max-width:480px){.stats-bar{grid-template-columns:1fr;}}
 
 
 /* ═══ PRIJZEN TEGELS ═══ */
@@ -585,6 +597,32 @@ footer{background:var(--footer-bg);border-top:3px solid var(--teal);padding:3rem
 
 @media(max-width:1000px){.ptarief-cols{grid-template-columns:1fr;gap:1.25rem;}}
 @media(max-width:820px){.prijzen-tegel-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  .ptarief-header{grid-template-columns:1fr;gap:1rem;}
+  .ptarief-prijs-wrap{text-align:left;}
+  .prijs-row{grid-template-columns:1fr;gap:.5rem;}
+  .prijs-row span:last-child{white-space:normal;}
+}
+
+/* ═══ MOBIEL PORTRET: TEKST-AFKAPPING FIXES ═══ */
+@media(max-width:640px){
+  /* C2: Hero knoppen stapelen */
+  .hero-btns{flex-direction:column;width:100%;}
+  .btn-w,.btn-ow{width:100%;text-align:center;}
+  /* C3: Service-tags verbergen */
+  .svc-tags{display:none;}
+  /* C4: RB-feiten 1 kolom + minder padding */
+  .rb-facts{grid-template-columns:1fr;}
+  .rb-band{padding:1.75rem 1.5rem;}
+  /* C5: Grote headings verkleinen */
+  .hero-h1{font-size:clamp(2rem,9vw,2.8rem);}
+  .ph-h{font-size:clamp(1.9rem,8vw,3rem);}
+  .cta-h{font-size:clamp(1.8rem,7.5vw,2.8rem);}
+  .portaal-hero-h{font-size:clamp(1.7rem,7vw,2.5rem);}
+  .h2{font-size:clamp(1.6rem,6.5vw,2.2rem);}
+  /* C6: Word-break safety net */
+  h1,h2,h3,.cta-h,.rb-band-h{overflow-wrap:break-word;word-break:break-word;}
+}
 
 </style>
 </head>
@@ -2323,6 +2361,25 @@ function setLanguage(lang){
   try{saved=localStorage.getItem('maitax_lang');}catch(e){}
   if(saved==='en')setLanguage('en');
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "Maitax Advies",
+  "description": "Erkend Register Belastingadviseur kantoor met vestigingen in Rotterdam, Rijswijk/Den Haag en Capelle a/d IJssel.",
+  "url": "https://maitax-advies.nl",
+  "telephone": "+31628444111",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Posthoornstraat 11",
+    "addressLocality": "Rotterdam",
+    "postalCode": "3011 WD",
+    "addressCountry": "NL"
+  },
+  "areaServed": ["Rotterdam", "Rijswijk", "Den Haag", "Capelle aan den IJssel"],
+  "priceRange": "€€"
+}
 </script>
 </body>
 </html>
