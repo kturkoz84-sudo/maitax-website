@@ -931,11 +931,11 @@ footer{background:var(--footer-bg);border-top:3px solid var(--teal);padding:3rem
       <div class="form-wrap rv d2">
         <div id="formCont">
           <div class="form-h" data-i18n="contact.form.h">Stuur ons een bericht</div>
-          <div class="fr"><div class="fg"><label data-i18n="form.voornaam">Voornaam</label><input type="text" placeholder="Jan" data-i18n-placeholder="form.ph.voornaam"></div><div class="fg"><label data-i18n="form.achternaam">Achternaam</label><input type="text" placeholder="Jansen" data-i18n-placeholder="form.ph.achternaam"></div></div>
-          <div class="fr"><div class="fg"><label data-i18n="form.email">E-mailadres</label><input type="email" placeholder="jan@jansen.nl" data-i18n-placeholder="form.ph.email"></div><div class="fg"><label data-i18n="form.telefoon">Telefoon</label><input type="tel" placeholder="06 12 34 56 78" data-i18n-placeholder="form.ph.telefoon"></div></div>
-          <div class="fg"><label data-i18n="form.ikben">Ik ben</label><select data-i18n-html="form.sel.ikben"><option value="">Selecteer</option><option>ZZP'er / Freelancer</option><option>MKB-ondernemer</option><option>Directeur-grootaandeelhouder (DGA)</option><option>Expat / Internationaal</option></select></div>
-          <div class="fg"><label data-i18n="form.hulp">Waarmee kunnen wij helpen?</label><select data-i18n-html="form.sel.hulp"><option value="">Selecteer een dienst</option><option>Belastingaangifte (IB / VPB / BTW)</option><option>Administratie &amp; Boekhouding</option><option>Salarisadministratie</option><option>Bedrijfsadvies &amp; Structuur</option><option>Internationaal Belastingrecht</option><option>Gratis kennismakingsgesprek</option><option>Anders</option></select></div>
-          <div class="fg"><label data-i18n="form.bericht">Uw bericht</label><textarea placeholder="Vertel ons kort uw situatie of vraag..." data-i18n-placeholder="form.ph.bericht"></textarea></div>
+          <div class="fr"><div class="fg"><label data-i18n="form.voornaam">Voornaam</label><input id="fVoornaam" type="text" placeholder="Jan" data-i18n-placeholder="form.ph.voornaam"></div><div class="fg"><label data-i18n="form.achternaam">Achternaam</label><input id="fAchternaam" type="text" placeholder="Jansen" data-i18n-placeholder="form.ph.achternaam"></div></div>
+          <div class="fr"><div class="fg"><label data-i18n="form.email">E-mailadres</label><input id="fEmail" type="email" placeholder="jan@jansen.nl" data-i18n-placeholder="form.ph.email"></div><div class="fg"><label data-i18n="form.telefoon">Telefoon</label><input id="fTelefoon" type="tel" placeholder="06 12 34 56 78" data-i18n-placeholder="form.ph.telefoon"></div></div>
+          <div class="fg"><label data-i18n="form.ikben">Ik ben</label><select id="fIkben" data-i18n-html="form.sel.ikben"><option value="">Selecteer</option><option>ZZP'er / Freelancer</option><option>MKB-ondernemer</option><option>Directeur-grootaandeelhouder (DGA)</option><option>Expat / Internationaal</option></select></div>
+          <div class="fg"><label data-i18n="form.hulp">Waarmee kunnen wij helpen?</label><select id="fHulp" data-i18n-html="form.sel.hulp"><option value="">Selecteer een dienst</option><option>Belastingaangifte (IB / VPB / BTW)</option><option>Administratie &amp; Boekhouding</option><option>Salarisadministratie</option><option>Bedrijfsadvies &amp; Structuur</option><option>Internationaal Belastingrecht</option><option>Gratis kennismakingsgesprek</option><option>Anders</option></select></div>
+          <div class="fg"><label data-i18n="form.bericht">Uw bericht</label><textarea id="fBericht" placeholder="Vertel ons kort uw situatie of vraag..." data-i18n-placeholder="form.ph.bericht"></textarea></div>
           <button class="form-btn" onclick="submitForm()" data-i18n="form.btn">Verstuur Bericht &#8594;</button>
         </div>
         <div class="fs" id="formSucc"><div class="fs-ico">&#10003;</div><div class="fs-h">Bericht ontvangen</div><p class="fs-p">Hartelijk dank. Een van onze RB-adviseurs neemt binnen één werkdag contact met u op.</p></div>
@@ -1335,8 +1335,51 @@ function go(id){
   setTimeout(reveal,120);
 }
 function submitForm(){
-  document.getElementById('formCont').style.display='none';
-  document.getElementById('formSucc').classList.add('on');
+  var voornaam = document.getElementById('fVoornaam').value.trim();
+  var achternaam = document.getElementById('fAchternaam').value.trim();
+  var email = document.getElementById('fEmail').value.trim();
+  var telefoon = document.getElementById('fTelefoon').value.trim();
+  var ikben = document.getElementById('fIkben').value;
+  var hulp = document.getElementById('fHulp').value;
+  var bericht = document.getElementById('fBericht').value.trim();
+  if(!voornaam || !email || !bericht){
+    alert('Vul minimaal uw naam, e-mailadres en bericht in.');
+    return;
+  }
+  var btn = document.querySelector('.form-btn');
+  btn.disabled = true;
+  btn.textContent = 'Versturen...';
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      access_key:'fe4e10a2-9025-4a75-82b1-34a844a877bd',
+      subject:'Nieuw contactbericht van '+voornaam+' '+achternaam,
+      from_name:'Maitax Website',
+      name:voornaam+' '+achternaam,
+      email:email,
+      telefoon:telefoon||'Niet opgegeven',
+      ik_ben:ikben||'Niet geselecteerd',
+      dienst:hulp||'Niet geselecteerd',
+      message:bericht
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.success){
+      document.getElementById('formCont').style.display='none';
+      document.getElementById('formSucc').classList.add('on');
+    } else {
+      btn.disabled=false;
+      btn.textContent='Verstuur Bericht \u2192';
+      alert('Er is een fout opgetreden. Probeer opnieuw of bel ons op 06 28 444 111.');
+    }
+  })
+  .catch(function(){
+    btn.disabled=false;
+    btn.textContent='Verstuur Bericht \u2192';
+    alert('Geen verbinding. Probeer opnieuw of bel ons op 06 28 444 111.');
+  });
 }
 function openMob(){document.getElementById('mobNav').classList.add('open');}
 function closeMob(){document.getElementById('mobNav').classList.remove('open');}
